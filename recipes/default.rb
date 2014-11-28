@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: tahoe
+# Cookbook Name:: tahoe-lafs
 # Recipe:: default
 #
 # Copyright (c) 2014 The Authors, All Rights Reserved.
@@ -43,14 +43,11 @@ reqs.each do |tahoe_requirement|
   package tahoe_requirement
 end
 
-python_pip 'Twisted' do
-  action     :install
-  virtualenv tahoe_venv
-end
-
-python_pip 'allmydata-tahoe' do
-  action     :install
-  virtualenv tahoe_venv
+%w( Twisted pyOpenSSL service_identity allmydata-tahoe ).each do |python_apps|
+  python_pip python_apps do
+    action     :install
+    virtualenv tahoe_venv
+  end
 end
 
 directory '/usr/local/bin' do

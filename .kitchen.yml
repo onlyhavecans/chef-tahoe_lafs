@@ -12,5 +12,5 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[tahoe::default]
+      - recipe[tahoe-lafs::default]
     attributes:

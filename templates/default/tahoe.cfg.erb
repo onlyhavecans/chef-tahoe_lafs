@@ -7,48 +7,11 @@
 # For details about the keys that can be set here, please
 # read the 'docs/configuration.rst' file that came with your
 # Tahoe installation.
+<%- node["tahoe"]["conf"].keys.each do |category| %>
 
-
-[node]
-nickname = <%= node[:tahoe][:nickname] %>
-web.port = tcp:3456:interface=127.0.0.1
-web.static = public_html
-#tub.port =
-#tub.location = 
-#log_gatherer.furl =
-#timeout.keepalive =
-#timeout.disconnect =
-#ssh.port = 8022
-#ssh.authorized_keys_file = ~/.ssh/authorized_keys
-
-[client]
-# Which services should this client connect to?
-introducer.furl = <%= node[:tahoe][:introducer] %>
-helper.furl = <%= node[:tahoe][:helper] %>
-#key_generator.furl =
-stats_gatherer.furl = <%= node[:tahoe][:stats] %>
-
-# What encoding parameters should this client use for uploads?
-shares.needed = <%= node[:tahoe][:shares][:needed] %>
-shares.happy = <%= node[:tahoe][:shares][:happy] %> 
-shares.total = <%= node[:tahoe][:shares][:total] %>
-
-[storage]
-# Shall this node provide storage service?
-enabled = <%= node[:tahoe][:storage][:enabled] %>
-readonly = <%= node[:tahoe][:storage][:readonly] %>
-reserved_space = <%= node[:tahoe][:storage][:reserved_space] %>
-expire.enabled = <%= node[:tahoe][:storage][:expire_enabled] %>
-expire.mode = <%= node[:tahoe][:storage][:expire_mode] %>
-
-[helper]
-# Shall this node run a helper service that clients can use?
-enabled = true
-
-[drop_upload]
-# Shall this node automatically upload files created or modified in a local directory?
-enabled = false
-# To specify the target of uploads, a mutable directory writecap URI must be placed
-# in 'private/drop_upload_dircap'.
-local.directory = ~/drop_upload
+[<%= category %>]
+  <%- node["tahoe"]["conf"][category].keys.each do |key| %>
+<%= key %> = <%= node["tahoe"]["conf"][category][key] %>
+  <%- end %>
+<%- end %>
 
