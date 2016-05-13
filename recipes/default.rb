@@ -1,11 +1,11 @@
 #
-# Cookbook Name:: tahoe-lafs
+# Cookbook Name:: tahoe_lafs
 # Recipe:: default
 #
 # Copyright (c) 2014 The Authors, All Rights Reserved.
 
 
-tahoe_dir  = node[:tahoe][:home_dir] || '/var/tahoe'
+tahoe_dir  = node['tahoe']['home_dir'] || '/var/tahoe'
 tahoe_venv = File.join(tahoe_dir, "venv")
 tahoe_bin  = File.join(tahoe_venv, "bin", "tahoe")
 tahoe_cfg  = File.join(tahoe_dir, "cfgs")
@@ -32,7 +32,7 @@ end
 include_recipe 'build-essential'
 
 reqs = []
-case node[:platform_family]
+case node['platform_family']
 when 'rhel'
   reqs = %w( sqlite-devel libffi-devel python-crypto openssl-devel )
 when 'debian'

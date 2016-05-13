@@ -1,6 +1,6 @@
 # Description
 
-Installs and configures `tahoe-lafs`, the Least-Authority File System and configures it to run using runit
+Installs and configures `tahoe_lafs`, the Least-Authority File System and configures it to run using runit
 
 # Requirements
 
@@ -26,7 +26,7 @@ Tested on:
 * sets up tahoe serice in runit
 
 # Usage
-Set up attributes in a role or wrapper cookbook and include `recipe[tahoe-lafs]`
+Set up attributes in a role or wrapper cookbook and include `recipe[tahoe_lafs]`
 
 At minimum you should set set the following configs as needed;
 * `node['tahoe']['conf']['node']['nickname']` - set the nickname in tahoe
